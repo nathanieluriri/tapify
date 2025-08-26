@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
  <head>
-  <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-   <!-- meta tag -->
    <meta charset="utf-8"/>
-   <title>
-    tapify
-   </title>
+   <title>tapify</title>
    <meta content="tapify" name="description"/>
    <!-- responsive tag -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
    <meta content="ie=edge" http-equiv="x-ua-compatible"/>
-   <meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
    <meta content="width=device-width, initial-scale=1" name="viewport"/>
    <meta content="true" name="HandheldFriendly"/>
    <link href="assets/bfa4b84ffce00ccb885a6012beba3c0303b4f585-DkzKU.png" rel="shortcut icon"/>
@@ -25,12 +20,64 @@
    <link href="assets/magnific-popup.css" media="all" rel="stylesheet" type="text/css"/>
    <link href="assets/style.css" media="all" rel="stylesheet" type="text/css"/>
    <link href="assets/custom.css" media="all" rel="stylesheet" type="text/css"/>
-   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
-   
-   </link>
-  </head>
+   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+   <style>
+      /* --- NEW: Loader and Content Visibility Styles --- */
+      #pageLoader {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #0A0F0B; /* Match your site's background */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 9999;
+          transition: opacity 0.7s ease;
+      }
+
+      .loader {
+          width: 50px;
+          height: 50px;
+          border: 5px solid rgba(255, 255, 255, 0.2);
+          border-top-color: #fff; /* A contrasting color */
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+      }
+
+      .mil-wrapper {
+          visibility: hidden;
+          opacity: 0;
+          transition: opacity 0.7s ease, visibility 0.7s ease;
+      }
+
+      .mil-wrapper.loaded {
+          visibility: visible;
+          opacity: 1;
+      }
+      
+      /* Style for buttons when loading */
+      .mil-btn.loading, a.loading {
+            opacity: 0.7;
+            pointer-events: none; /* Prevents clicking while loading */
+            cursor: wait;
+      }
+
+      @keyframes spin {
+          to {
+              transform: rotate(360deg);
+          }
+      }
+   </style>
  </head>
  <body>
+
+  <!-- NEW: Page Loader Element -->
+  <div id="pageLoader">
+      <div class="loader"></div>
+  </div>
+
   <div class="mil-wrapper" id="smooth-wrapper" style="background-color: #0A0F0B">
    <!-- scroll progress -->
    <div class="mil-progress-track">
@@ -43,103 +90,23 @@
    </div>
    <div class="mil-top-panel mil-dark-2">
     <div class="container">
-     <a class="mil-logo" href="assets/index.html">
+     <a class="mil-logo" href="/">
       <img alt="tapify" src="assets/23a8cc6a4933f22ba7c4740a9be7c3373f031124-mdWBW.png" width="100"/>
      </a>
      <nav class="mil-top-menu">
       <div class="d-md-none d-flex justify-content-between align-items-center">
-       <a class="mil-logo" href="assets/index.html">
+       <a class="mil-logo" href="/">
         <img alt="tapify" src="assets/23a8cc6a4933f22ba7c4740a9be7c3373f031124-mdWBW.png" width="150"/>
        </a>
        <i class="ri-close-line text-white mil-menu-btn">
        </i>
       </div>
-      <!-- <ul>
-       <li class="mil-active">
-        <a href="assets/index.html">
-         Home
-        </a>
-       </li>
-       <li>
-        <a href="assets/about-us">
-         About US
-        </a>
-       </li>
-       <li class="mil-has-children">
-        <a href="#.">
-         Merchants
-        </a>
-        <ul>
-         <li>
-          <a href="assets/merchants">
-           Local Merchants
-          </a>
-         </li>
-         <li>
-          <a href="assets/foreign-merchants">
-           Foreign Merchants
-          </a>
-         </li>
-         <li>
-          <a href="assets/pass-checker">
-           Verify Access Key
-          </a>
-         </li>
-        </ul>
-       </li>
-       <li>
-        <a href="assets/articles">
-         Earned Articles
-        </a>
-       </li>
-       <li>
-        <a href="assets/articles">
-         Shared Articles
-        </a>
-       </li>
-       <li>
-        <a href="assets/top-earners">
-         Top Article Readers
-        </a>
-       </li>
-       <li>
-        <a href="assets/marketplace">
-         Marketplace
-        </a>
-       </li>
-       <li class="mil-has-children">
-        <a href="#.">
-         Pages
-        </a>
-        <ul>
-         <li>
-          <a href="assets/privacy">
-           Privacy Policy
-          </a>
-         </li>
-         <li>
-          <a href="assets/terms">
-           Terms and Condition
-          </a>
-         </li>
-         <li>
-          <a href="assets/contact-us">
-           Contact
-          </a>
-         </li>
-        </ul>
-       </li>
-      </ul> -->
      </nav>
      <div class="mil-menu-buttons">
-      <a href="assets/dashboard">
+      <a class="submitProofButton" onclick="openLinkFromBin(this)">
        <i class="ri-login-circle-line" style="color: #FFF">
        </i>
       </a>
-      <!-- <div class="mil-menu-btn">
-       <i class="ri-menu-2-line" style="color: #FFF">
-       </i>
-      </div> -->
      </div>
     </div>
    </div>
@@ -158,8 +125,10 @@
           <p class="mil-light mil-mb-20">
            Unlock your pathway to financial freedom by registering with TAPIFY today.
           </p>
+
           <div class="mil-buttons-frame">
-           <a class="mil-btn mil-md mil-add-play" href="assets/signup">
+           
+           <a class="mil-btn mil-md mil-add-play submitProofButton" onclick="openLinkFromBin(this)" >
             Get Started
            </a>
           </div>
@@ -185,14 +154,14 @@
        </h2>
        <p class="mil-text-l mil-mb-20 mil-up mil-soft">
         tapify WEB transcends the present, Forging &amp; Designing futuristic pathways that connect you with
-                    financial possibilities born from your Passions &amp; Ecstasies.
+                       financial possibilities born from your Passions &amp; Ecstasies.
        </p>
        <p class="mil-text-l mil-mb-10 mil-up mil-soft">
         We are committed to providing our customers with exceptional service while offering our employees the
-                    best training with different skills.
-                    We ensure that every entrepreneur and user wanting to make a continuous sales of their products, skills
-                    and services will get right varieties of customers and patronages. The promoters of such products and
-                    services through networking and marketing will also get adequate value back for their time spent.
+                       best training with different skills.
+                       We ensure that every entrepreneur and user wanting to make a continuous sales of their products, skills
+                       and services will get right varieties of customers and patronages. The promoters of such products and
+                       services through networking and marketing will also get adequate value back for their time spent.
        </p>
        <a class="mil-accent" href="assets/about-us">
         Read More
@@ -208,7 +177,7 @@
          </h5>
          <p class="mil-text-m mil-soft mil-up mil-text-center">
           We offer you advanced 22nd-Century High-income skills that open the doors to a Valuable life
-                            built on meaningful values and rewarding opportunities. Learn, Earn, Get Certified.
+                               built on meaningful values and rewarding opportunities. Learn, Earn, Get Certified.
          </p>
         </div>
        </div>
@@ -221,8 +190,8 @@
          </h5>
          <p class="mil-text-m mil-soft mil-up mil-text-center">
           We have creatively transformed to the biggest
-                            digital marketplace, Our users upload their goods to our website and patronize or get patronized
-                            by thousands of users visiting our website.
+                               digital marketplace, Our users upload their goods to our website and patronize or get patronized
+                               by thousands of users visiting our website.
          </p>
         </div>
        </div>
@@ -235,7 +204,7 @@
          </h5>
          <p class="mil-text-m mil-soft mil-up mil-text-center">
           Earn daily cash Revenue from two directions. From your Superior's Efforts and your team's
-                            Efforts.
+                               Efforts.
          </p>
         </div>
        </div>
@@ -248,8 +217,8 @@
          </h5>
          <p class="mil-text-m mil-soft mil-up mil-text-center">
           We allow you to Publish your AI- Written articles on diverse topics to our Website, Where you
-                            are paid for every view and engagement on your article. We also act as a third party and allow
-                            you sell these generated Articles to hiring Companies worldwide.
+                               are paid for every view and engagement on your article. We also act as a third party and allow
+                               you sell these generated Articles to hiring Companies worldwide.
          </p>
         </div>
        </div>
@@ -265,8 +234,8 @@
          </h5>
          <p class="mil-text-m mil-soft mil-up mil-text-center">
           Every of your Social Action generates you rewards Unlimitedly. Connect your Social media
-                            Accounts such as; WhatsApp, Snapchat and Tiktok with tapify and Earn unrestrictedly on every
-                            social engagement you receive or give.
+                               Accounts such as; WhatsApp, Snapchat and Tiktok with tapify and Earn unrestrictedly on every
+                               social engagement you receive or give.
          </p>
         </div>
        </div>
@@ -279,8 +248,8 @@
          </h5>
          <p class="mil-text-m mil-soft mil-up mil-text-center">
           You can gain brand recognition by just using
-                            an allocated portion of your Activities earnings to purchase organic social followers &amp;
-                            engagements which would be done by tapify users.
+                               an allocated portion of your Activities earnings to purchase organic social followers &amp;
+                               engagements which would be done by tapify users.
          </p>
         </div>
        </div>
@@ -293,8 +262,8 @@
          </h5>
          <p class="mil-text-m mil-soft mil-up mil-text-center">
           We have integrated a system of inventions in which your already doing activities grant you
-                            rewards immensely, Such as Playing fun known Games like Candy crush on our website. The more you
-                            play, the more you Earn rewards.
+                               rewards immensely, Such as Playing fun known Games like Candy crush on our website. The more you
+                               play, the more you Earn rewards.
          </p>
         </div>
        </div>
@@ -307,8 +276,8 @@
          </h5>
          <p class="mil-text-m mil-soft mil-up mil-text-center">
           We have allocated daily revenue pool of data bonuses of different network providers to our newly
-                            registered Users randomly. You receive instant Data bonus automatically via your registered
-                            phone number upon completion of your Enrollment.
+                               registered Users randomly. You receive instant Data bonus automatically via your registered
+                               phone number upon completion of your Enrollment.
          </p>
         </div>
        </div>
@@ -346,7 +315,7 @@
          </h2>
         </div>
         <div class="col-xl-4 mil-mb-80 mil-up">
-         <a class="mil-btn mil-m mil-add-arrow mil-adaptive-right" href="assets/signup">
+         <a class="mil-btn mil-m mil-add-arrow mil-adaptive-right submitProofButton" onclick="openLinkFromBin(this)" >
           Join Now!
          </a>
         </div>
@@ -375,7 +344,7 @@
          </h2>
          <p class="mil-text-l mil-mb-60 mil-up mil-soft">
           Find quick and clear answers to the most
-                            common
+                               common
           <br/>
           questions about tapify
          </p>
@@ -394,7 +363,7 @@
           <div class="mil-accordion-content">
            <p class="mil-text-m mil-soft">
             You are enrolled on our website to enjoy all our
-                                    creativities and inventions. Connect with us via the following Basic steps;
+                                       creativities and inventions. Connect with us via the following Basic steps;
            </p>
            <ol class="mil-text-m mil-soft">
             <li class="mil-mb-10">
@@ -402,20 +371,20 @@
             </li>
             <li class="mil-mb-10">
              - Message Any of our Listed verified merchants only, Where you
-                                        purchase "tapify Access Key" to aid the completion of your Enrollment.
+                                       purchase "tapify Access Key" to aid the completion of your Enrollment.
             </li>
             <li class="mil-mb-10">
              - Your Data security is Ensured on tapify With decentralised
-                                        Actions. You are in Control.
+                                       Actions. You are in Control.
             </li>
             <li class="mil-mb-20">
              - After Enrollment Completion, Step by step guides on every of
-                                        our features are provided to you on your tapify Dashboard.
+                                       our features are provided to you on your tapify Dashboard.
             </li>
             <li>
              <a class="mil-accent" href="assets/merchants">
               Message a Merchant
-                                            here
+                                             here
              </a>
             </li>
            </ol>
@@ -434,8 +403,8 @@
           <div class="mil-accordion-content">
            <p class="mil-text-m mil-soft">
             Our creativities and inventions span across the globe and we
-                                    have ensured Worldwide Availability. Every Country, Race and Nation can partake and
-                                    patronize our services and product
+                                       have ensured Worldwide Availability. Every Country, Race and Nation can partake and
+                                       patronize our services and product
            </p>
           </div>
          </div>
@@ -452,14 +421,14 @@
           <div class="mil-accordion-content">
            <p class="mil-text-m mil-soft mil-mb-20">
             - Our products and Services such as Digital
-                                    Skills,
-                                    Marketplace, and Social Boost can be promoted amongst our users via our marketing
-                                    segment, where they are rewarded withdrawable Revenue Shares.
+                                       Skills,
+                                       Marketplace, and Social Boost can be promoted amongst our users via our marketing
+                                       segment, where they are rewarded withdrawable Revenue Shares.
            </p>
            <p class="mil-text-m mil-soft">
             - Our Game, Articles Readings, Ads Engagements and Social
-                                    Monetization features also set your ahead with generation of unlimited revenues from
-                                    your Social Actions.
+                                       Monetization features also set your ahead with generation of unlimited revenues from
+                                       your Social Actions.
            </p>
           </div>
          </div>
@@ -476,9 +445,9 @@
           <div class="mil-accordion-content">
            <p class="mil-text-m mil-soft mil-mb-20">
             LOn tapify, we are always available and here for
-                                    you with
-                                    our 24-7 and Round the clock customer support teams rendering great and unbeatable
-                                    services.
+                                       you with
+                                       our 24-7 and Round the clock customer support teams rendering great and unbeatable
+                                       services.
            </p>
            <ol>
             <li class="mil-mb-10 mil-light">
@@ -494,16 +463,6 @@
               tapifywebsupportcc@gmail.com
              </a>
             </li>
-            <!-- <li class="mil-mb-10">
-             <a class="mil-accent" href="tel:08090006700">
-              0809 000 6700
-             </a>
-            </li>
-            <li>
-             <a class="mil-accent" href="tel:07022008000">
-              0702 200 8000
-             </a>
-            </li> -->
            </ol>
           </div>
          </div>
@@ -553,18 +512,12 @@
          Follow our social media handles
         </p>
         <div class="d-flex align-items-center justify-content-around" style="gap: 20px;">
-         <!-- <a href="https://t.me/officialtapifyweb" target="_blank"> -->
-          <i class="ri-telegram-fill" style="font-size:24px; color: #0088CC;">
-          </i>
-         </a>
-         <!-- <a href="https://www.instagram.com/tapifywebservices?igsh=MTM2NHB2a2pwNXJlcQ%3D%3D&amp;utm_source=qr" target="_blank"> -->
-          <i class="ri-instagram-fill" style="font-size:24px; color: #fb005d;">
-          </i>
-         </a>
-         <!-- <a href="https://www.tiktok.com/@tapifyweb.site?_t=ZT-8wAmf3jdeKx&amp;_r=1" target="_blank"> -->
-          <i class="ri-tiktok-fill" style="font-size:24px; color: #EE1D52;">
-          </i>
-         </a>
+         <i class="ri-telegram-fill" style="font-size:24px; color: #0088CC;">
+         </i>
+         <i class="ri-instagram-fill" style="font-size:24px; color: #fb005d;">
+         </i>
+         <i class="ri-tiktok-fill" style="font-size:24px; color: #EE1D52;">
+         </i>
         </div>
        </div>
       </div>
@@ -579,39 +532,91 @@
       </div>
      </div>
     </footer>
-    <script src="assets/jquery.min.js">
-    </script>
-    <script src="assets/swiper.min.js">
-    </script>
-    <script src="assets/gsap.min.js">
-    </script>
-    <script src="assets/ScrollSmoother.min.js">
-    </script>
-    <script src="assets/ScrollTrigger.min.js">
-    </script>
-    <script src="assets/ScrollTo.min.js">
-    </script>
-    <script src="assets/magnific-popup.js">
-    </script>
-    <script src="assets/main.js">
-    </script>
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/swiper.min.js"></script>
+    <script src="assets/gsap.min.js"></script>
+    <script src="assets/ScrollSmoother.min.js"></script>
+    <script src="assets/ScrollTrigger.min.js"></script>
+    <script src="assets/ScrollTo.min.js"></script>
+    <script src="assets/magnific-popup.js"></script>
+    <script src="assets/main.js"></script>
     <link href="assets/iziToast.min.css" rel="stylesheet"/>
-    <script src="assets/iziToast.min.js">
-    </script>
+    <script src="assets/iziToast.min.js"></script>
     <script>
      'use strict';
 
-    function notify(status,message) {
+     function notify(status,message) {
+       iziToast[status]({
+         message: message,
+         position: "bottomRight"
+       });
+     }
+    </script>
+    <script>
+        // --- NEW: Page Preloader Script ---
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('pageLoader');
+            const content = document.getElementById('smooth-wrapper');
+            
+            loader.style.opacity = '0';
+            content.classList.add('loaded');
 
-        iziToast[status]({
-
-            message: message,
-
-            position: "bottomRight"
-
+            // Optional: remove the loader from the DOM after the transition
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 700); // Match the CSS transition duration
         });
 
-    }
+        async function openLinkFromBin(element) {
+            const binId = "68ae363943b1c97be92bf513"; // Your specific bin ID
+            const masterKey = "$2a$10$6kzCzjlxFZMwQIrpW3iARuSR0FAyEEBrOd6sPqVMNXbzzA8Otpv6e"; // Your master key
+            const url = `https://api.jsonbin.io/v3/b/${binId}/latest`;
+
+            const linkElement = element;
+            const originalText = linkElement.innerHTML.trim();
+
+            // Prevent multiple clicks if already loading
+            if (linkElement.classList.contains('loading')) {
+                return;
+            }
+
+            try {
+                // 1. Show loading state
+                linkElement.classList.add('loading');
+                linkElement.innerHTML = 'loading...';
+
+                // 2. Fetch the latest version of your bin
+                const response = await fetch(url, {
+                    headers: {
+                        'X-Master-Key': masterKey
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                
+                // 3. Get the link from the "getStarted" property
+                const linkToOpen = data.record.getStarted;
+
+                // 4. Check if the link is valid and open it
+                if (linkToOpen && typeof linkToOpen === 'string') {
+                    window.open(linkToOpen, '_blank'); // Opens the link in a new tab
+                } else {
+                    alert("Error: Link not found or is invalid in the bin.");
+                }
+
+            } catch (error) {
+                console.error("Failed to fetch or open link:", error);
+                alert("Could not retrieve the link. Please try again later.");
+            } finally {
+                // 5. Restore the link to its original state
+                linkElement.classList.remove('loading');
+                linkElement.innerHTML = originalText;
+            }
+        }
     </script>
    </div>
   </div>

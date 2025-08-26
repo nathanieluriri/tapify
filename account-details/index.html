@@ -5,38 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Details</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-       <link href="assets/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
-   <link href="assets/bootstrap-grid.css" media="all" rel="stylesheet" type="text/css"/>
-   <link href="assets/swiper.min.css" media="all" rel="stylesheet" type="text/css"/>
-   <link href="assets/magnific-popup.css" media="all" rel="stylesheet" type="text/css"/>
-      <link href="assets/switzer.css" media="all" rel="stylesheet" type="text/css"/>
-      <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="assets/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="assets/bootstrap-grid.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="assets/swiper.min.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="assets/magnific-popup.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="assets/switzer.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-       <link href="assets/style.css" media="all" rel="stylesheet" type="text/css"/>
-   <link href="assets/custom.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="assets/style.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="assets/custom.css" media="all" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .button-modern {
-  background-color: #cc5c00; /* Professional blue */
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: 'Inter', sans-serif; /* A clean, modern font */
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, transform 0.2s;
-}
+            background-color: #cc5c00; /* Professional blue */
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif; /* A clean, modern font */
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.2s;
+        }
 
-.button-modern:hover {
-  background-color: #cc5c00; /* A slightly darker blue on hover */
-  transform: translateY(-2px); /* Lifts the button slightly */
-}
-h6{
-    color: #f0f3f6;
-}
+        .button-modern:hover {
+            background-color: #cc5c00; /* A slightly darker blue on hover */
+            transform: translateY(-2px); /* Lifts the button slightly */
+        }
+        h6{
+            color: #f0f3f6;
+        }
         /* Basic reset and body styling */
         body {
             margin: 0;
@@ -51,9 +51,9 @@ h6{
             box-sizing: border-box;
             color: #333;
             background: url(./green-bg.png) ;
-                background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top center;
         }
 
         /* The main card for account details */
@@ -70,6 +70,7 @@ h6{
         h6{
             max-width: 300px;
             text-align: center;
+            font-size: medium;
         }
         /* Card Header Styling */
         .card-header {
@@ -182,89 +183,165 @@ h6{
             visibility: visible;
         }
 
+        /* --- NEW: Loader and Content Visibility Styles --- */
+        #pageLoader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f4f7f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #e6e9ec;
+            border-top-color: #cc5c00;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        #mainContent {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #mainContent.loaded {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
     </style>
 </head>
 <body>
 
-    <h6>To get registered on tapify and start earning immediately make payment of 10000 into the account below</h6>
-
-    <!-- This is the container for the account information -->
-    <div class="account-card">
-        <div class="card-header">
-            <h1>Account Details</h1>
-        </div>
-        <div class="details-body">
-            <!-- Bank Name Section -->
-            <div class="detail-row">
-                <div class="detail-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7V9H22V7L12 2ZM11 10V17H9V10H11ZM15 10V17H13V10H15ZM20 10V17H18V10H20ZM6 10V17H4V10H6ZM2 19V20H22V19H2Z"></path></svg>
-                </div>
-                <div class="detail-text">
-                    <p>Bank Name</p>
-                    <h2>ZENITH BANK PLC</h2>
-                </div>
-            </div>
-            
-            <!-- Account Number Section -->
-            <div class="detail-row">
-                <div class="detail-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14 11H16V13H14V11ZM10 11H12V13H10V11ZM6 11H8V13H6V11ZM20 5V19C20 20.1046 19.1046 21 18 21H4C2.89543 21 2 20.1046 2 19V5C2 3.89543 2.89543 3 4 3H18C19.1046 3 20 3.89543 20 5ZM18 5H4V9H18V5ZM4 19H18V11H4V19Z"></path></svg>
-                </div>
-                <div class="detail-text">
-                    <p>Account Number</p>
-                    <h2 id="account-number">2012345678</h2>
-                </div>
-                <button class="copy-button" onclick="copyAccountNumber()">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 4H4C2.89543 4 2 4.89543 2 6V18C2 19.1046 2.89543 20 4 20H16C17.1046 20 18 19.1046 18 18V6C18 4.89543 17.1046 4 16 4ZM16 18H4V6H16V18ZM20 2H8V0H20C21.1046 0 22 0.89543 22 2V14H20V2Z"></path></svg>
-                </button>
-            </div>
-            
-            <!-- Account Name Section -->
-            <div class="detail-row">
-                <div class="detail-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5C7.58172 2.5 4 6.08172 4 10.5C4 14.9183 7.58172 18.5 12 18.5C16.4183 18.5 20 14.9183 20 10.5C20 6.08172 16.4183 2.5 12 2.5ZM12 4.5C15.3137 4.5 18 7.18629 18 10.5C18 13.8137 15.3137 16.5 12 16.5C8.68629 16.5 6 13.8137 6 10.5C6 7.18629 8.68629 4.5 12 4.5ZM12 11.5C10.6193 11.5 9.5 12.6193 9.5 14C9.5 15.3807 10.6193 16.5 12 16.5C13.3807 16.5 14.5 15.3807 14.5 14C14.5 12.6193 13.3807 11.5 12 11.5ZM12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7Z"></path></svg>
-                </div>
-                <div class="detail-text">
-                    <p>Account Name</p>
-                    <h2>JOHN A. DOE</h2>
-                </div>
-            </div>
-        </div>
+    <!-- NEW: Page Loader Element -->
+    <div id="pageLoader">
+        <div class="loader"></div>
     </div>
-    <h6>Click below to send Proof of payment and Get registered</h6>
 
-    <button class="button-modern">Submit Proof</button>
+    <!-- NEW: Wrapper for main content -->
+    <div id="mainContent">
+        <h6>To get registered on tapify and start earning immediately make payment of 10000 into the account below</h6>
+
+        <!-- This is the container for the account information -->
+        <div class="account-card">
+            <div class="card-header">
+                <h1>Account Details</h1>
+            </div>
+            <div class="details-body">
+                <!-- Bank Name Section -->
+                <div class="detail-row">
+                    <div class="detail-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7V9H22V7L12 2ZM11 10V17H9V10H11ZM15 10V17H13V10H15ZM20 10V17H18V10H20ZM6 10V17H4V10H6ZM2 19V20H22V19H2Z"></path></svg>
+                    </div>
+                    <div class="detail-text">
+                        <p>Bank Name</p>
+                        <h2 id="bankName">ZENITH BANK PLC</h2>
+                    </div>
+                </div>
+                
+                <!-- Account Number Section -->
+                <div class="detail-row">
+                    <div class="detail-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14 11H16V13H14V11ZM10 11H12V13H10V11ZM6 11H8V13H6V11ZM20 5V19C20 20.1046 19.1046 21 18 21H4C2.89543 21 2 20.1046 2 19V5C2 3.89543 2.89543 3 4 3H18C19.1046 3 20 3.89543 20 5ZM18 5H4V9H18V5ZM4 19H18V11H4V19Z"></path></svg>
+                    </div>
+                    <div class="detail-text">
+                        <p>Account Number</p>
+                        <h2 id="account-number">2012345678</h2>
+                    </div>
+                    <button class="copy-button" onclick="copyAccountNumber()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 4H4C2.89543 4 2 4.89543 2 6V18C2 19.1046 2.89543 20 4 20H16C17.1046 20 18 19.1046 18 18V6C18 4.89543 17.1046 4 16 4ZM16 18H4V6H16V18ZM20 2H8V0H20C21.1046 0 22 0.89543 22 2V14H20V2Z"></path></svg>
+                    </button>
+                </div>
+                
+                <!-- Account Name Section -->
+                <div class="detail-row">
+                    <div class="detail-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5C7.58172 2.5 4 6.08172 4 10.5C4 14.9183 7.58172 18.5 12 18.5C16.4183 18.5 20 14.9183 20 10.5C20 6.08172 16.4183 2.5 12 2.5ZM12 4.5C15.3137 4.5 18 7.18629 18 10.5C18 13.8137 15.3137 16.5 12 16.5C8.68629 16.5 6 13.8137 6 10.5C6 7.18629 8.68629 4.5 12 4.5ZM12 11.5C10.6193 11.5 9.5 12.6193 9.5 14C9.5 15.3807 10.6193 16.5 12 16.5C13.3807 16.5 14.5 15.3807 14.5 14C14.5 12.6193 13.3807 11.5 12 11.5ZM12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7Z"></path></svg>
+                    </div>
+                    <div class="detail-text">
+                        <p>Account Name</p>
+                        <h2 id="accountName">JOHN A. DOE</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h6>Click below to send Proof of payment and Get registered</h6>
+
+        <button id="submitProofButton" class="button-modern" onclick="openLinkFromBin()">
+            <span class="loader" style="display: none;"></span>
+            <span class="button-text">Submit Proof</span>
+        </button>
+    </div>
+
     <!-- Message box for copy confirmation -->
     <div id="copy-message">Account number copied!</div>
 
     <script>
+        // --- NEW: Image Preloader Script ---
+        window.addEventListener('load', function() {
+            const imageUrl = './green-bg.png'; // The path to your background image
+            const img = new Image();
+            img.src = imageUrl;
+
+            img.onload = function() {
+                // When the image is loaded, hide the loader and show the content
+                const loader = document.getElementById('pageLoader');
+                const content = document.getElementById('mainContent');
+                
+                loader.style.opacity = '0';
+                content.classList.add('loaded');
+
+                // Optional: remove the loader from the DOM after the transition
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500); // Match the CSS transition duration
+            };
+            
+            img.onerror = function() {
+                // If the image fails to load, still hide the loader and show content
+                console.error("Background image failed to load.");
+                const loader = document.getElementById('pageLoader');
+                const content = document.getElementById('mainContent');
+                loader.style.display = 'none';
+                content.classList.add('loaded');
+            };
+        });
+
+
         // Function to copy the account number to the clipboard
         function copyAccountNumber() {
-            // Get the text from the h2 element
             const accountNumber = document.getElementById('account-number').innerText;
-            
-            // Create a temporary textarea element to hold the text
             const textArea = document.createElement('textarea');
             textArea.value = accountNumber;
-            
-            // Style it to be invisible
             textArea.style.position = 'fixed';
             textArea.style.top = '0';
             textArea.style.left = '0';
             textArea.style.opacity = '0';
-            
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
             
             try {
-                // Use the modern clipboard API if available, with a fallback
                 if (navigator.clipboard) {
                     navigator.clipboard.writeText(accountNumber).then(() => {
                         showCopyMessage();
                     });
                 } else {
-                    // Fallback for older browsers
                     document.execCommand('copy');
                     showCopyMessage();
                 }
@@ -272,7 +349,6 @@ h6{
                 console.error('Failed to copy text: ', err);
             }
             
-            // Clean up the temporary element
             document.body.removeChild(textArea);
         }
 
@@ -281,12 +357,53 @@ h6{
             const messageBox = document.getElementById('copy-message');
             messageBox.classList.add('show');
             
-            // Hide the message after 2 seconds
             setTimeout(() => {
                 messageBox.classList.remove('show');
             }, 2000);
         }
     </script>
+    <script>
+        async function openLinkFromBin() {
+            const binId = "68ae363943b1c97be92bf513";
+            const masterKey = "$2a$10$6kzCzjlxFZMwQIrpW3iARuSR0FAyEEBrOd6sPqVMNXbzzA8Otpv6e";
+            const url = `https://api.jsonbin.io/v3/b/${binId}/latest`;
 
+            const button = document.getElementById('submitProofButton');
+            const buttonText = button.querySelector('.button-text');
+            const loader = button.querySelector('.loader');
+            const originalText = buttonText.textContent;
+
+            try {
+                button.disabled = true;
+                buttonText.textContent = 'loading...';
+                loader.style.display = 'inline-block';
+
+                const response = await fetch(url, {
+                    headers: { 'X-Master-Key': masterKey }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                const link = data.record.getStarted;
+
+                if (link && typeof link === 'string') {
+                    window.open(link, '_blank');
+                } else {
+                    alert("Error: Link not found or is invalid in the bin.");
+                }
+
+            } catch (error) {
+                console.error("Failed to fetch or open link:", error);
+                alert("Could not retrieve the link. Please try again later.");
+            } finally {
+                button.disabled = false;
+                buttonText.textContent = originalText;
+                loader.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>

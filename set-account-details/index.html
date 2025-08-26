@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Secure Bank App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0052cc;
+            --primary-hover: #0041a3;
+            --background-color: #f4f7f9;
+            --container-bg: #ffffff;
+            --text-color: #121b28;
+            --label-color: #6c788a;
+            --border-color: #e6e9ec;
+            --shadow-color: rgba(0, 30, 80, 0.07);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background-color);
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background: var(--container-bg);
+            padding: 30px 40px;
+            width: 100%;
+            max-width: 700px;
+            border-radius: 16px;
+            box-shadow: 0 8px A30px var(--shadow-color);
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        h2 {
+            color: var(--text-color);
+            font-size: 24px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-top: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            color: var(--label-color);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.2);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+        
+        button:disabled {
+            background-color: #a0b3c4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .user-block {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f9fafb;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        #loginSection, #appSection {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .visible {
+            display: block !important;
+            opacity: 1 !important;
+        }
+        
+        /* Loader styles */
+        .loader {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #FFF;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        .full-page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .full-page-loader .loader {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--primary-color);
+            border-bottom-color: transparent;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 2000;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-content p {
+            margin: 0 0 20px 0;
+            font-size: 18px;
+            color: var(--text-color);
+        }
+
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Section -->
+        <div id="loginSection">
+            <h2>Secure Login</h2>
+            <label for="loginUsername">Username:</label>
+            <input type="text" id="loginUsername" />
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" />
+            <button id="loginButton" onclick="login()">Login</button>
+        </div>
+
+        <!-- Main App Section -->
+        <div id="appSection">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>Welcome</h2>
+                <button onclick="logout()">Logout</button>
+            </div>
+
+            <!-- NEW: Manage Link Section -->
+            <h3>Manage Link</h3>
+            <label for="getStartedLink">"Get Started" Button Link:</label>
+            <input type="text" id="getStartedLink" />
+            <button id="saveLinkButton" onclick="saveLink()">Save Link</button>
+
+            <h3>Bank Details</h3>
+            <label for="bankName">Bank Name:</label>
+            <input type="text" id="bankName" />
+            <label for="accountNumber">Account Number:</label>
+            <input type="text" id="accountNumber" />
+            <label for="accountName">Account Name:</label>
+            <input type="text" id="accountName" />
+            <button id="saveBankButton" onclick="saveBankDetails()">Save Bank Details</button>
+
+            <h3>Manage Users</h3>
+            <div id="usersContainer"></div>
+            <button onclick="addUserField()">Add User</button>
+            <button id="saveUsersButton" onclick="saveUsers()">Save Users</button>
+        </div>
+    </div>
+    
+    <!-- Full Page Loader -->
+    <div id="pageLoader" class="full-page-loader" style="display: none;">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal-overlay">
+        <div class="modal-content">
+            <p id="modalMessage"></p>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const bankBinId = "68ae363943b1c97be92bf513";
+        const authBinId = "68ae3618d0ea881f4066dec4";
+        const masterKey = "$2a$10$6kzCzjlxFZMwQIrpW3iARuSR0FAyEEBrOd6sPqVMNXbzzA8Otpv6e";
+        const baseUrl = "https://api.jsonbin.io/v3/b/";
+
+        // --- UI & State Management ---
+        const loginSection = document.getElementById("loginSection");
+        const appSection = document.getElementById("appSection");
+        const pageLoader = document.getElementById("pageLoader");
+        const modal = document.getElementById("modal");
+        const modalMessage = document.getElementById("modalMessage");
+
+        window.onload = () => {
+            if (localStorage.getItem("authenticated") === "true") {
+                showApp();
+            } else {
+                loginSection.classList.add("visible");
+            }
+        };
+
+        function showLoader(buttonId, show = true) {
+            const button = document.getElementById(buttonId);
+            if (!button) return;
+            
+            if (show) {
+                button.disabled = true;
+                button.innerHTML = `<span class="loader"></span> Loading...`;
+            } else {
+                button.disabled = false;
+                // Restore original text
+                if (buttonId === 'loginButton') button.innerHTML = 'Login';
+                if (buttonId === 'saveBankButton') button.innerHTML = 'Save Bank Details';
+                if (buttonId === 'saveUsersButton') button.innerHTML = 'Save Users';
+                if (buttonId === 'saveLinkButton') button.innerHTML = 'Save Link'; // NEW
+            }
+        }
+
+        function showModal(message) {
+            modalMessage.textContent = message;
+            modal.classList.add("show");
+        }
+
+        function closeModal() {
+            modal.classList.remove("show");
+        }
+
+        // --- API & Logic ---
+        function login() {
+            const username = document.getElementById("loginUsername").value.trim();
+            const password = document.getElementById("loginPassword").value.trim();
+            
+            if (!username || !password) {
+                showModal("Please enter both username and password.");
+                return;
+            }
+
+            showLoader('loginButton');
+            fetch(`${baseUrl}${authBinId}/latest`, { headers: { "X-Master-Key": masterKey } })
+                .then(res => res.json())
+                .then(data => {
+                    const users = data.record.users;
+                    const user = users.find(u => u.username === username && u.password === password);
+
+                    if (user) {
+                        localStorage.setItem("authenticated", "true");
+                        showApp();
+                    } else {
+                        showModal("Invalid credentials!");
+                    }
+                })
+                .catch(err => showModal("An error occurred. Please try again."))
+                .finally(() => showLoader('loginButton', false));
+        }
+
+        function logout() {
+            localStorage.removeItem("authenticated");
+            location.reload();
+        }
+
+        async function showApp() {
+            loginSection.classList.remove("visible");
+            pageLoader.style.display = 'flex';
+            
+            await Promise.all([fetchBankDetails(), fetchUsers()]);
+            
+            pageLoader.style.display = 'none';
+            appSection.classList.add("visible");
+        }
+
+        async function fetchBankDetails() {
+            try {
+                const res = await fetch(`${baseUrl}${bankBinId}/latest`, { headers: { "X-Master-Key": masterKey } });
+                const data = await res.json();
+                const record = data.record;
+                document.getElementById("bankName").value = record.accountDetails.bankName;
+                document.getElementById("accountNumber").value = record.accountDetails.accountNumber;
+                document.getElementById("accountName").value = record.accountDetails.accountName;
+                document.getElementById("getStartedLink").value = record.getStarted; // NEW
+            } catch (err) {
+                showModal("Failed to fetch bank details.");
+            }
+        }
+        
+        // NEW: Function to save the link
+        async function saveLink() {
+            const newLink = document.getElementById("getStartedLink").value;
+            showLoader('saveLinkButton');
+
+            try {
+                // First, fetch the current record to get existing accountDetails
+                const res = await fetch(`${baseUrl}${bankBinId}/latest`, { headers: { "X-Master-Key": masterKey } });
+                if (!res.ok) throw new Error('Failed to fetch current data');
+                const data = await res.json();
+                
+                // Prepare the full payload to avoid overwriting other data
+                const payload = {
+                    ...data.record, // Keep existing data
+                    getStarted: newLink // Update only the link
+                };
+
+                // Now, update the bin with the full payload
+                const putRes = await fetch(`${baseUrl}${bankBinId}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json", "X-Master-Key": masterKey },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!putRes.ok) throw new Error('Failed to save link');
+                
+                showModal("Link updated successfully!");
+
+            } catch (error) {
+                showModal("Error saving link. Please try again.");
+                console.error(error);
+            } finally {
+                showLoader('saveLinkButton', false);
+            }
+        }
+
+
+        function saveBankDetails() {
+            const payload = {
+                getStarted: document.getElementById("getStartedLink").value, // Also include the link when saving bank details
+                accountDetails: {
+                    bankName: document.getElementById("bankName").value,
+                    accountNumber: document.getElementById("accountNumber").value,
+                    accountName: document.getElementById("accountName").value
+                }
+            };
+
+            showLoader('saveBankButton');
+            fetch(`${baseUrl}${bankBinId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json", "X-Master-Key": masterKey },
+                body: JSON.stringify(payload)
+            })
+            .then(res => {
+                if (!res.ok) throw new Error('Failed to save');
+                return res.json();
+            })
+            .then(() => showModal("Bank details updated successfully!"))
+            .catch(() => showModal("Error saving bank details."))
+            .finally(() => showLoader('saveBankButton', false));
+        }
+
+        async function fetchUsers() {
+            try {
+                const res = await fetch(`${baseUrl}${authBinId}/latest`, { headers: { "X-Master-Key": masterKey } });
+                const data = await res.json();
+                const users = data.record.users;
+                const container = document.getElementById("usersContainer");
+                container.innerHTML = "";
+                users.forEach((user, index) => {
+                    container.innerHTML += `
+                        <div class="user-block">
+                            <label for="username-${index}">Username:</label>
+                            <input type="text" id="username-${index}" value="${user.username}">
+                            <label for="password-${index}">Password:</label>
+                            <input type="text" id="password-${index}" value="${user.password}">
+                        </div>
+                    `;
+                });
+            } catch (err) {
+                showModal("Failed to fetch users.");
+            }
+        }
+
+        function addUserField() {
+            const container = document.getElementById("usersContainer");
+            const index = container.children.length;
+            const newUserBlock = document.createElement('div');
+            newUserBlock.className = 'user-block';
+            newUserBlock.innerHTML = `
+                <label for="username-${index}">Username:</label>
+                <input type="text" id="username-${index}" placeholder="new username">
+                <label for="password-${index}">Password:</label>
+                <input type="text" id="password-${index}" placeholder="new password">
+            `;
+            container.appendChild(newUserBlock);
+        }
+
+        function saveUsers() {
+            const container = document.getElementById("usersContainer");
+            const blocks = container.querySelectorAll(".user-block");
+            const users = [];
+
+            blocks.forEach((block, i) => {
+                const username = document.getElementById(`username-${i}`).value.trim();
+                const password = document.getElementById(`password-${i}`).value.trim();
+                if (username && password) {
+                    users.push({ username, password });
+                }
+            });
+
+            const payload = { users };
+
+            showLoader('saveUsersButton');
+            fetch(`${baseUrl}${authBinId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json", "X-Master-Key": masterKey },
+                body: JSON.stringify(payload)
+            })
+            .then(res => {
+                if (!res.ok) throw new Error('Failed to save');
+                return res.json();
+            })
+            .then(() => showModal("Users updated successfully!"))
+            .catch(() => showModal("Error saving users."))
+            .finally(() => showLoader('saveUsersButton', false));
+        }
+    </script>
+</body>
+</html>
