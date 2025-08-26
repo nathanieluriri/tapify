@@ -182,7 +182,9 @@
             opacity: 1;
             visibility: visible;
         }
-
+        button{
+            margin: auto;
+        }
         /* --- NEW: Loader and Content Visibility Styles --- */
         #pageLoader {
             position: fixed;
@@ -210,6 +212,9 @@
         #mainContent {
             visibility: hidden;
             opacity: 0;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
             transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
