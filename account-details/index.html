@@ -5,21 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Details</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link href="assets/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+   <link href="assets/bootstrap-grid.css" media="all" rel="stylesheet" type="text/css"/>
+   <link href="assets/swiper.min.css" media="all" rel="stylesheet" type="text/css"/>
+   <link href="assets/magnific-popup.css" media="all" rel="stylesheet" type="text/css"/>
+      <link href="assets/switzer.css" media="all" rel="stylesheet" type="text/css"/>
+      <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+       <link href="assets/style.css" media="all" rel="stylesheet" type="text/css"/>
+   <link href="assets/custom.css" media="all" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        .button-modern {
+  background-color: #cc5c00; /* Professional blue */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif; /* A clean, modern font */
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.button-modern:hover {
+  background-color: #cc5c00; /* A slightly darker blue on hover */
+  transform: translateY(-2px); /* Lifts the button slightly */
+}
+h6{
+    color: #f0f3f6;
+}
         /* Basic reset and body styling */
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
             background-color: #f4f7f9; /* A light grey, professional background */
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
             box-sizing: border-box;
             color: #333;
+            background: url(/assets/plax/img/green-bg.png) ;
+                background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
         }
 
         /* The main card for account details */
@@ -33,7 +67,10 @@
             box-shadow: 0 8px 30px rgba(0, 30, 80, 0.07);
             overflow: hidden; /* Ensures inner elements respect the border radius */
         }
-
+        h6{
+            max-width: 300px;
+            text-align: center;
+        }
         /* Card Header Styling */
         .card-header {
             padding: 24px 30px;
@@ -72,7 +109,7 @@
         .detail-icon {
             margin-right: 16px;
             flex-shrink: 0;
-            color: #0052cc; /* A professional blue for icons */
+            color: #cc5c00; /* A professional blue for icons */
         }
 
         .detail-icon svg {
@@ -149,6 +186,8 @@
 </head>
 <body>
 
+    <h6>To get registered on tapify and start earning immediately make payment of 10000 into the account below</h6>
+
     <!-- This is the container for the account information -->
     <div class="account-card">
         <div class="card-header">
@@ -192,7 +231,9 @@
             </div>
         </div>
     </div>
-    
+    <h6>Click below to send Proof of payment and Get registered</h6>
+
+    <button class="button-modern">Get Started</button>
     <!-- Message box for copy confirmation -->
     <div id="copy-message">Account number copied!</div>
 
