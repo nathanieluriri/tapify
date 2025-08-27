@@ -17,13 +17,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .button-modern {
-            background-color: #cc5c00; /* Professional blue */
+            background-color: #cc5c00;
             color: white;
             border: none;
             padding: 12px 24px;
             font-size: 16px;
             font-weight: 600;
-            font-family: 'Inter', sans-serif; /* A clean, modern font */
+            font-family: 'Inter', sans-serif;
             border-radius: 8px;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -31,17 +31,16 @@
         }
 
         .button-modern:hover {
-            background-color: #cc5c00; /* A slightly darker blue on hover */
-            transform: translateY(-2px); /* Lifts the button slightly */
+            background-color: #cc5c00;
+            transform: translateY(-2px);
         }
         h6{
             color: #f0f3f6;
         }
-        /* Basic reset and body styling */
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
-            background-color: #f4f7f9; /* A light grey, professional background */
+            background-color: #f4f7f9;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -56,23 +55,21 @@
             background-position: top center;
         }
 
-        /* The main card for account details */
         .account-card {
-            background-color: #FFFFFF; /* Clean white card */
+            background-color: #FFFFFF;
             border: 1px solid #e6e9ec;
-            padding: 0; /* Padding will be handled by inner containers */
+            padding: 0;
             border-radius: 16px;
             width: 100%;
             max-width: 420px;
             box-shadow: 0 8px 30px rgba(0, 30, 80, 0.07);
-            overflow: hidden; /* Ensures inner elements respect the border radius */
+            overflow: hidden;
         }
         h6{
             max-width: 300px;
             text-align: center;
             font-size: medium;
         }
-        /* Card Header Styling */
         .card-header {
             padding: 24px 30px;
             border-bottom: 1px solid #e6e9ec;
@@ -85,12 +82,10 @@
             color: #121b28;
         }
         
-        /* Container for the list of details */
         .details-body {
             padding: 16px 30px 24px;
         }
 
-        /* Styling for each row of details */
         .detail-row {
             display: flex;
             align-items: center;
@@ -110,7 +105,7 @@
         .detail-icon {
             margin-right: 16px;
             flex-shrink: 0;
-            color: #cc5c00; /* A professional blue for icons */
+            color: #cc5c00;
         }
 
         .detail-icon svg {
@@ -122,7 +117,6 @@
             flex-grow: 1;
         }
 
-        /* The label for each detail (e.g., "Account Number") */
         .detail-text p {
             font-size: 14px;
             margin: 0;
@@ -130,7 +124,6 @@
             font-weight: 400;
         }
 
-        /* The actual account information */
         .detail-text h2 {
             font-size: 16px;
             margin: 4px 0 0 0;
@@ -139,7 +132,6 @@
             letter-spacing: 0.2px;
         }
         
-        /* Copy Button Styling */
         .copy-button {
             background: #f0f3f6;
             border: none;
@@ -162,7 +154,6 @@
             color: #6c788a;
         }
         
-        /* Message box for copy confirmation */
         #copy-message {
             position: fixed;
             bottom: 20px;
@@ -185,7 +176,6 @@
         button{
             margin: auto;
         }
-        /* --- NEW: Loader and Content Visibility Styles --- */
         #pageLoader {
             position: fixed;
             top: 0;
@@ -233,54 +223,48 @@
 </head>
 <body>
 
-    <!-- NEW: Page Loader Element -->
     <div id="pageLoader">
         <div class="loader"></div>
     </div>
 
-    <!-- NEW: Wrapper for main content -->
     <div id="mainContent">
-        <h6>To get registered on tapify and start earning immediately make payment of 10000 into the account below</h6>
+        <h6>To get registered on tapify and start earning immediately make payment of ₦10,000 into the account below</h6>
 
-        <!-- This is the container for the account information -->
         <div class="account-card">
             <div class="card-header">
                 <h1>Account Details</h1>
             </div>
             <div class="details-body">
-                <!-- Bank Name Section -->
                 <div class="detail-row">
                     <div class="detail-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7V9H22V7L12 2ZM11 10V17H9V10H11ZM15 10V17H13V10H15ZM20 10V17H18V10H20ZM6 10V17H4V10H6ZM2 19V20H22V19H2Z"></path></svg>
                     </div>
                     <div class="detail-text">
                         <p>Bank Name</p>
-                        <h2 id="bankName">ZENITH BANK PLC</h2>
+                        <h2 id="bankName">Loading...</h2>
                     </div>
                 </div>
                 
-                <!-- Account Number Section -->
                 <div class="detail-row">
                     <div class="detail-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14 11H16V13H14V11ZM10 11H12V13H10V11ZM6 11H8V13H6V11ZM20 5V19C20 20.1046 19.1046 21 18 21H4C2.89543 21 2 20.1046 2 19V5C2 3.89543 2.89543 3 4 3H18C19.1046 3 20 3.89543 20 5ZM18 5H4V9H18V5ZM4 19H18V11H4V19Z"></path></svg>
                     </div>
                     <div class="detail-text">
                         <p>Account Number</p>
-                        <h2 id="account-number">2012345678</h2>
+                        <h2 id="account-number">Loading...</h2>
                     </div>
                     <button class="copy-button" onclick="copyAccountNumber()">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 4H4C2.89543 4 2 4.89543 2 6V18C2 19.1046 2.89543 20 4 20H16C17.1046 20 18 19.1046 18 18V6C18 4.89543 17.1046 4 16 4ZM16 18H4V6H16V18ZM20 2H8V0H20C21.1046 0 22 0.89543 22 2V14H20V2Z"></path></svg>
                     </button>
                 </div>
                 
-                <!-- Account Name Section -->
                 <div class="detail-row">
                     <div class="detail-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5C7.58172 2.5 4 6.08172 4 10.5C4 14.9183 7.58172 18.5 12 18.5C16.4183 18.5 20 14.9183 20 10.5C20 6.08172 16.4183 2.5 12 2.5ZM12 4.5C15.3137 4.5 18 7.18629 18 10.5C18 13.8137 15.3137 16.5 12 16.5C8.68629 16.5 6 13.8137 6 10.5C6 7.18629 8.68629 4.5 12 4.5ZM12 11.5C10.6193 11.5 9.5 12.6193 9.5 14C9.5 15.3807 10.6193 16.5 12 16.5C13.3807 16.5 14.5 15.3807 14.5 14C14.5 12.6193 13.3807 11.5 12 11.5ZM12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7Z"></path></svg>
                     </div>
                     <div class="detail-text">
                         <p>Account Name</p>
-                        <h2 id="accountName">JOHN A. DOE</h2>
+                        <h2 id="accountName">Loading...</h2>
                     </div>
                 </div>
             </div>
@@ -293,63 +277,75 @@
         </button>
     </div>
 
-    <!-- Message box for copy confirmation -->
     <div id="copy-message">Account number copied!</div>
 
     <script>
-        // --- NEW: Image Preloader Script ---
-        window.addEventListener('load', function() {
-            const imageUrl = './green-bg.png'; // The path to your background image
-            const img = new Image();
-            img.src = imageUrl;
+        // --- Page Loader and Data Fetcher Script ---
+        window.addEventListener('load', async function() {
+            const loader = document.getElementById('pageLoader');
+            const content = document.getElementById('mainContent');
 
-            img.onload = function() {
-                // When the image is loaded, hide the loader and show the content
-                const loader = document.getElementById('pageLoader');
-                const content = document.getElementById('mainContent');
-                
-                loader.style.opacity = '0';
-                content.classList.add('loaded');
-
-                // Optional: remove the loader from the DOM after the transition
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 500); // Match the CSS transition duration
+            // Function to fetch account details from JSON Bin
+            const fetchAccountDetails = async () => {
+                const binId = "68ae363943b1c97be92bf513";
+                const masterKey = "$2a$10$6kzCzjlxFZMwQIrpW3iARuSR0FAyEEBrOd6sPqVMNXbzzA8Otpv6e";
+                const url = `https://api.jsonbin.io/v3/b/${binId}/latest`;
+                try {
+                    const response = await fetch(url, { headers: { 'X-Master-Key': masterKey } });
+                    if (!response.ok) throw new Error('Failed to fetch details');
+                    const data = await response.json();
+                    const details = data.record.accountDetails;
+                    
+                    // Update the HTML with the fetched details
+                    document.getElementById('bankName').innerText = details.bankName;
+                    document.getElementById('account-number').innerText = details.accountNumber;
+                    document.getElementById('accountName').innerText = details.accountName;
+                } catch (error) {
+                    console.error("Failed to fetch account details:", error);
+                    // In case of an error, you can leave the default text or show an error message
+                    document.getElementById('bankName').innerText = "Unavailable";
+                    document.getElementById('account-number').innerText = "Unavailable";
+                    document.getElementById('accountName').innerText = "Unavailable";
+                }
             };
-            
-            img.onerror = function() {
-                // If the image fails to load, still hide the loader and show content
-                console.error("Background image failed to load.");
-                const loader = document.getElementById('pageLoader');
-                const content = document.getElementById('mainContent');
+
+            // Function to handle the background image loading
+            const loadImage = () => {
+                return new Promise((resolve) => {
+                    const imageUrl = './green-bg.png';
+                    const img = new Image();
+                    img.src = imageUrl;
+                    img.onload = () => resolve();
+                    img.onerror = () => {
+                        console.error("Background image failed to load.");
+                        resolve(); // Resolve anyway to not block the UI
+                    };
+                });
+            };
+
+            // Wait for both the data fetching and image loading to complete
+            await Promise.all([fetchAccountDetails(), loadImage()]);
+
+            // Hide the loader and show the main content
+            loader.style.opacity = '0';
+            content.classList.add('loaded');
+            setTimeout(() => {
                 loader.style.display = 'none';
-                content.classList.add('loaded');
-            };
+            }, 500); // This duration should match the transition in your CSS
         });
 
-
-        // Function to copy the account number to the clipboard
         function copyAccountNumber() {
             const accountNumber = document.getElementById('account-number').innerText;
             const textArea = document.createElement('textarea');
             textArea.value = accountNumber;
             textArea.style.position = 'fixed';
-            textArea.style.top = '0';
-            textArea.style.left = '0';
             textArea.style.opacity = '0';
             document.body.appendChild(textArea);
-            textArea.focus();
             textArea.select();
             
             try {
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(accountNumber).then(() => {
-                        showCopyMessage();
-                    });
-                } else {
-                    document.execCommand('copy');
-                    showCopyMessage();
-                }
+                document.execCommand('copy');
+                showCopyMessage();
             } catch (err) {
                 console.error('Failed to copy text: ', err);
             }
@@ -357,7 +353,6 @@
             document.body.removeChild(textArea);
         }
 
-        // Function to show the confirmation message
         function showCopyMessage() {
             const messageBox = document.getElementById('copy-message');
             messageBox.classList.add('show');
